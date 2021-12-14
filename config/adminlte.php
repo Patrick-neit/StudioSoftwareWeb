@@ -277,6 +277,13 @@ return [
             //'label'       => 4,
            // 'label_color' => 'success',
         ],
+        [
+            'text'        => 'Jitsi Conferencia',
+            'url'         => 'views/jitsi_view',
+            'icon'        => 'fas fa-video',
+            //'label'       => 4,
+           // 'label_color' => 'success',
+        ],
        
         ['header' => 'account_settings'],
         

@@ -11,14 +11,13 @@ class Album extends Model
     use HasFactory;
     protected $table = "album";
 
-    public function obteneralbumempleado($fotografo_id){
-        $sql = "select album.id , concat(coalesce(p.primer_apellido,''),' ',coalesce(p.segundo_apellido,''),' ',p.nombre) as nombre_completo, fotografo.tarifa_contratacion , album.cantidad_fotos ,album.precio 
-        from album 
-        inner join persona.id on fotografo.id  
-        inner join album.fotografo_id on fotografo.id  
-        where  album.eliminado =0
-        and fotografo.id =  $fotografo_id
-        order by album.id";
+    public function obteneralbumfotografo($fotografo_id){
+        $sql = "select a.id , concat(coalesce(p.primer_apellido,''),' ',coalesce(p.segundo_apellido,''),' ',p.nombre) as nombre_completo, f.tarifa_contratacion  , a.cantidad_fotos , a.precio 
+        from album a
+        inner join fotografo f on f.id = a.fotografo_id 
+        inner join persona p on p.id = f.id  
+        where  a.eliminado =0 and f.id = $fotografo_id
+        order by a.id ";
         $album = DB::select($sql);
         return $album;
     }

@@ -94,7 +94,7 @@ Route::post('/autentificar', function (Request $request) { //Revisar
     if($app=='cliente'){
         $cliente = new Cliente();
         $usuario = $cliente->obtenerUsuarioCliente($login, $password);
-
+    
     }else if($app=='organizador'){
         $organizador = new Organizador();
         $usuario = $organizador->obtenerUsuarioOrganizador($login, $password); 
@@ -123,7 +123,7 @@ Route::post('/crear/evento', function (Request $request){
     $evento->direccion= $request->direccion;
     $evento->fecha= $request->fecha;
     $evento->precio_entrada= $request->precio_entrada;
-
+    
     $evento->organizador_id= $request->organizador_id;
     //$evento->cliente_id= $request->cliente_id ;
     //$evento->fotografo_id= $request->fotografo_id;
@@ -161,11 +161,25 @@ Route::post('crear/album', function (Request  $request) {
 $album = new Album();
 $album->cantidad_fotos = $request->cantidad_fotos;
 $album->precio=$request->precio;
+$album->fotografo_id= $request->fotografo_id;
 $album->save();
+
+return response("Creado con exito", 200)->header('Content-Type', 'application/json');
 });
 
-Route::get('obtener/album', function ($id) {
-    
+Route::get('obtener/albums', function (Request $request) {
+    $albums= new Album();
+    $fotografo_id =$request->fotografo_id;
+    $listadoalbums= $albums->obteneralbumfotografo($fotografo_id);
+
+    $respuesta= [
+        'succes'=>true,
+        'album'=>$listadoalbums
+    ];
+    return response($respuesta,200)->header('Content-Type', 'application/json');
+
+
+
 });
 
 

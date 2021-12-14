@@ -7,9 +7,7 @@ use App\Models\User;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModuloController;
-// use App\Http\Controllers\FuncionalidadController;
-// use App\Http\Controllers\EstudianteController;
-// use App\Http\Controllers\DocenteController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +24,16 @@ Route::get('/', function () {
     return view('login');
 });
 
+/*Route::get('/', function () {
+    return view('jitsi_view');
+});*/
 
 
 
 
 
-//include_once 'webroutes/RepEmpleadosRoutes.php';
+
+
 
 
 
