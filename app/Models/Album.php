@@ -22,5 +22,18 @@ class Album extends Model
         return $album;
     }
 
+    public function obteneralbumsofertados(){
+
+        $sql = "select a.id , concat(coalesce(p.primer_apellido,''),' ',coalesce(p.segundo_apellido,''),' ',p.nombre) as nombre_completo, f.tarifa_contratacion  , a.cantidad_fotos , a.precio ,e.nombre ,e.descripcion ,e.direccion 
+        from album a
+        inner join fotografo f on f.id = a.fotografo_id 
+        inner join evento e on e.album_id = a.id 
+        inner join persona p on p.id = f.id  
+        where  a.eliminado =0 
+        order by a.id ";
+        $albumofertado= DB::select($sql);
+        return $albumofertado;
+    }
+
 
 }
